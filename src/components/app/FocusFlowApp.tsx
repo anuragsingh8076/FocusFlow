@@ -119,7 +119,7 @@ export default function FocusFlowApp() {
   return (
     <Card className="w-full max-w-2xl shadow-xl">
       <CardHeader>
-        <CardTitle className="font-headline text-3xl">FocusFlow</CardTitle>
+        <CardTitle className="font-headline text-2xl">Today's Plan</CardTitle>
         <CardDescription>Your daily focus planner to get things done.</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -128,7 +128,7 @@ export default function FocusFlowApp() {
         <div>
           <div className="flex items-center justify-between mb-4">
             <div className="space-y-1">
-              <h2 className="text-xl font-semibold tracking-tight">Today's Tasks</h2>
+              <h2 className="text-xl font-semibold tracking-tight">Your Tasks</h2>
               {totalCount > 0 && (
                  <p className="text-sm text-muted-foreground">
                   {completedCount} of {totalCount} completed.
