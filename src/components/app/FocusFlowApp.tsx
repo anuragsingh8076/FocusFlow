@@ -72,21 +72,21 @@ export default function FocusFlowApp() {
     const incompleteTasks = tasks.filter(t => !t.completed);
     const completedTasks = tasks.filter(t => t.completed);
 
-    const tasksToPrioritize = incompleteTasks.map(({ title, category }) => ({ title, category }));
+    const tasksToPrioritize = incompleteTasks.map(({ id, title, category }) => ({ id, title, category }));
     
     const result = await getPrioritizedTasks(tasksToPrioritize);
 
     if (result.success && result.data) {
-      const priorityMap = new Map(result.data.map(p => [p.title, { priority: p.priority, reason: p.reason }]));
+      const priorityMap = new Map(result.data.map(p => [p.id, { priority: p.priority, reason: p.reason }]));
       
       const sortedIncompleteTasks = [...incompleteTasks]
         .map(task => {
-          const aiData = priorityMap.get(task.title);
+          const aiData = priorityMap.get(task.id);
           return aiData ? { ...task, aiReason: aiData.reason } : task;
         })
         .sort((a, b) => {
-          const priorityA = priorityMap.get(a.title)?.priority ?? Infinity;
-          const priorityB = priorityMap.get(b.title)?.priority ?? Infinity;
+          const priorityA = priorityMap.get(a.id)?.priority ?? Infinity;
+          const priorityB = priorityMap.get(b.id)?.priority ?? Infinity;
           return priorityA - priorityB;
         });
 

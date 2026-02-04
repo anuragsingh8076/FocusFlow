@@ -16,6 +16,7 @@ const TaskCategorySchema = z.enum(['Study', 'Work', 'Personal']);
 
 const TaskPrioritizationInputSchema = z.array(
   z.object({
+    id: z.string().describe('The unique identifier for the task.'),
     title: z.string(),
     category: TaskCategorySchema,
   })
@@ -24,6 +25,7 @@ export type TaskPrioritizationInput = z.infer<typeof TaskPrioritizationInputSche
 
 const TaskPrioritizationOutputSchema = z.array(
   z.object({
+    id: z.string().describe('The unique identifier for the task.'),
     title: z.string(),
     category: TaskCategorySchema,
     priority: z.number().describe('The suggested priority of the task. Lower number means higher priority.'),
@@ -44,13 +46,15 @@ const taskPrioritizationPrompt = ai.definePrompt({
   output: {schema: TaskPrioritizationOutputSchema},
   prompt: `You are a helpful assistant designed to suggest a task prioritization based on the category of the tasks.
 
-Given the following list of tasks with their categories, suggest a priority (lower number = higher priority) and a short reason for the priority.
+Given the following list of tasks with their IDs, titles and categories, suggest a priority (lower number = higher priority) and a short reason for the priority for each task.
+
+It is crucial that you return the same ID for each task as provided in the input.
 
 Prioritize 'Work' tasks higher during business hours, 'Study' tasks during study hours, and consider 'Personal' tasks based on urgency.
 
 Tasks:
 {{#each this}}
-- Title: {{{title}}}, Category: {{{category}}}
+- ID: {{{id}}}, Title: {{{title}}}, Category: {{{category}}}
 {{/each}}`,
 });
 
