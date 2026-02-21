@@ -37,6 +37,7 @@ https://focus-flow-eta-nine.vercel.app/
 
 ---
 
+
 ## 📦 Installation & Setup
 
 To run this project locally:
@@ -79,7 +80,9 @@ Cloud sync with Firebase
 👤 Author
 Anurag Singh
 
+
 Full Stack / Backend Developer (Java & React)
+
 
 Passionate about building useful and clean applications
 
